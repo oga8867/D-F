@@ -34,7 +34,6 @@ for j in SERVER_NAME:
 
 
         url = f"https://api.neople.co.kr/df/servers/{SERVER_NAME}/characters?characterName={i}&wordType=full&startDate={start_date.strftime('%Y%m%d')}&endDate={end_date.strftime('%Y%m%d')}&limit=100000&apikey={API_KEY}"
-        #url2 = f"https://api.neople.co.kr/df/servers/{SERVER_NAME}/characters?wordType=nickname&limit=100&apikey={API_KEY}"
         response = requests.get(url)
         player_info = response.json()
         time.sleep(1)
