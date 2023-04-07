@@ -1,3 +1,31 @@
+# import requests
+# import json
+# from _datetime import datetime, timedelta
+# server_id = "prey"
+# character_name = "336"
+# apikey = "eEWia7fBRvOd4sws6g7rgL9wqyUcKXEH"
+# ch_id = "a43193325156632eac9b96161e62c2dd"
+# end_date = datetime.now()
+# start_date = end_date - timedelta(days=30)
+#
+# # API 요청 URL
+# url = f"https://api.neople.co.kr/df/servers/{server_id}/characters/{character_name}?apikey={apikey}"
+# url2 = f"https://api.neople.co.kr/df/servers/{server_id}/characters?characterName={character_name}&apikey=eEWia7fBRvOd4sws6g7rgL9wqyUcKXEH"
+# url3 = f"https://api.neople.co.kr/df/servers/{server_id}/characters/{ch_id}/timeline?limit=50&code=511&startDate={start_date.strftime('%Y%m%d')}&endDate={end_date.strftime('%Y%m%d')}&next=<next>&next=<next>&apikey=eEWia7fBRvOd4sws6g7rgL9wqyUcKXEH"
+# # API 요청에 필요한 정보
+#
+# # API 요청을 보내기 위한 URL 생성
+# request_url = url3.format(server_id=server_id, character_name=character_name, apikey=apikey)
+#
+# # API 요청 보내기
+# response = requests.get(request_url)
+#
+# # API 응답 결과를 JSON 형태로 변환
+# data = json.loads(response.text)
+#
+# # 캐릭터 정보 출력
+# print(data)
+
 #만렙이전 접은 유저들은 몇렙에서 많이 접엇을까? 그 레벨 구간대에 가장 재미없는 컨텐츠가 있는 것은 아닐까?
 import pandas as pd
 import requests
@@ -6,7 +34,7 @@ import matplotlib.pyplot as plt
 import time
 import numpy as np
 # API 키와 검색할 서버명, 검색할 기간(최근 30일) 설정
-API_KEY = "Input_your_Key_:)"
+API_KEY = "eEWia7fBRvOd4sws6g7rgL9wqyUcKXEH"
 SERVER_NAME = ['prey','anton','bakal','cain','casillas','diregie','hilder','siroco']
 end_date = datetime.now()
 start_date = end_date - timedelta(days=30)
@@ -34,6 +62,7 @@ for j in SERVER_NAME:
 
 
         url = f"https://api.neople.co.kr/df/servers/{SERVER_NAME}/characters?characterName={i}&wordType=full&startDate={start_date.strftime('%Y%m%d')}&endDate={end_date.strftime('%Y%m%d')}&limit=100000&apikey={API_KEY}"
+        #url2 = f"https://api.neople.co.kr/df/servers/{SERVER_NAME}/characters?wordType=nickname&limit=100&apikey={API_KEY}"
         response = requests.get(url)
         player_info = response.json()
         time.sleep(1)
