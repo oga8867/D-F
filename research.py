@@ -44,30 +44,30 @@ def main():
         st.image('./error.gif')
 
 
-    # try:
-    if 'char_lv' in globals() and char_lv >= 110:
-        examples = '만렙이시네요!'
-    else:
-        examples = '중간에 그만 두셧군요.'
+    try:
+        if 'char_lv' in globals() and char_lv >= 110:
+            examples = '만렙이시네요!'
+        else:
+            examples = '중간에 그만 두셧군요.'
+    
+        url = f"https://api.neople.co.kr/df/servers/{servers[SERVER_NAME]}/characters?characterName={name}&apikey={API_KEY}"
+        response = requests.get(url)
+        player_info = response.json()
+    
+        char_lv = player_info['rows'][0]['level']
+        charname = player_info['rows'][0]['characterName']
+        charclass = player_info['rows'][0]['jobName']
+        research = st.text_area(
+            f'{examples} 혹시 게임 중간에 마음에 안드는 구간이나 컨텐츠는 무엇이였나요? 혹은 재미없거나 흥미가 떨어진다고 생각하시는 부분은 어떤 것인가요?')
+        if st.button('제출'):
+            st.write('감사합니다!')
+            data.append([charservername,charname, charclass, char_lv, research])
+            df = pd.DataFrame(data)
+            #df = pd.DataFrame(data, columns=['ch_id', 'class', 'LV', 'research'])
+            print(df)
+            df.to_csv('research.csv',mode='a', header=False, encoding='cp949', index=False)
 
-    url = f"https://api.neople.co.kr/df/servers/{servers[SERVER_NAME]}/characters?characterName={name}&apikey={API_KEY}"
-    response = requests.get(url)
-    player_info = response.json()
-
-    char_lv = player_info['rows'][0]['level']
-    charname = player_info['rows'][0]['characterName']
-    charclass = player_info['rows'][0]['jobName']
-    research = st.text_area(
-        f'{examples} 혹시 게임 중간에 마음에 안드는 구간이나 컨텐츠는 무엇이였나요? 혹은 재미없거나 흥미가 떨어진다고 생각하시는 부분은 어떤 것인가요?')
-    if st.button('제출'):
-        st.write('감사합니다!')
-        data.append([charservername,charname, charclass, char_lv, research])
-        df = pd.DataFrame(data)
-        #df = pd.DataFrame(data, columns=['ch_id', 'class', 'LV', 'research'])
-        print(df)
-        df.to_csv('research.csv',mode='a', header=False, encoding='cp949', index=False)
-    #
-    # except:
-    #     pass
+    except:
+        pass
 
 main()
