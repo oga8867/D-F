@@ -45,7 +45,7 @@ def main():
 
 
     try:
-        if 'char_lv' in globals() and char_lv >= 110:
+        if char_lv >= 110:
             examples = '만렙이시네요!'
         else:
             examples = '중간에 그만 두셧군요.'
